@@ -1,9 +1,12 @@
-<h1>Pages Index</h1>
+<h1>All Listings</h1>
 
-
-<% if user_signed_in? %>
-	<%= link_to 'Your Listings', listings_path %><br>
-	<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+<% if @listings.any? %>
+	<% @listings.each do |listing| %>
+		<%= link_to listing_path(listing) do %>
+			<%= listing.title %>
+		<% end %>
+		<p>Hosted by: <%= listing.user.email %></p>
+	<% end %>
 <% else %>
-	<%=	link_to 'Sign in', new_user_session_path %>
+	<p>No listings yet </p>
 <% end %>

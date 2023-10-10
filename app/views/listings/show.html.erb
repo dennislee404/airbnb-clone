@@ -8,7 +8,9 @@
 <p>Host: <%= @listing.user.email %></p>
 <p>Availabilty: <%= @listing.availability %></p>
 
-<%= link_to 'Edit Listing', edit_listing_path %>
-<%= link_to 'Delete Listing', listing_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-<%= link_to 'Your Listings', listings_path %>
-<%= link_to 'Home', root_path %>
+<% if current_user.id == @listing.user.id %>
+	<%= link_to 'Edit Listing', edit_listing_path %>
+	<%= link_to 'Delete Listing', listing_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<% else %>
+	<p>Make Booking</p>
+<% end %>
