@@ -1,8 +1,9 @@
-This is pages index
+<h1>Pages Index</h1>
 
 
 <% if user_signed_in? %>
-	<%=	button_to 'Logout', destroy_user_session_path, method: :delete %>
+	<%= link_to 'Your Listings', listings_path %><br>
+	<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 <% else %>
 	<%=	link_to 'Sign in', new_user_session_path %>
 <% end %>

@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+	before_action :set_listing, only: [:show, :edit, :update, :destroy]
 	def index
 		@listings = current_user.listings.all
 	end
@@ -24,13 +25,25 @@ class ListingsController < ApplicationController
 	end
 
 	def update
+		if @listing.update(listing_params)
+			redirect_to listing_path(@listing)
+		else
+			render :edit 
+		end
 	end
 
 	def destroy
+		@listing.destroy
+
+		redirect_to listings_path
 	end
 
 	private
-		def listing_param
-			# params.require(:listing).permit(:)
+		def set_listing
+			@listing = Listing.find(params[:id])
+		end
+
+		def listing_params
+			params.require(:listing).permit(:title, :description, :rooms, :capacity, :availability, :price, :location, :property_type)
 		end
 end

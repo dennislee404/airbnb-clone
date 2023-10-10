@@ -1,11 +1,14 @@
-This is listing index page
+<h1>Your Listing</h1>
 
 <% if @listings.any? %>
 	<% @listings.each do |listing| %>
-		<%= listing.title %>
+		<%= link_to listing_path(listing) do %>
+			<%= listing.title %><br><br>
+		<% end %>
 	<% end %>
 <% else %>
 	<p>No listings yet </p>
 <% end %>
 
-<%= link_to 'Create New Listing', new_listing_path %>
+<%= link_to 'Create New Listing', new_listing_path %><br>
+<%= link_to 'Home', root_path %>
