@@ -1,0 +1,8 @@
+<%= form_with model: @booking do |f| %>
+	<%= f.hidden_field :listing_id, value: @listing.id%>
+	<%= f.date_field :check_in%>
+	<br>
+	<%= f.date_field :check_out%>
+	<br><br>
+	<%= f.submit %>
+<% end %>

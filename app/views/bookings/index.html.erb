@@ -1,0 +1,13 @@
+<h1>Your Bookings</h1>
+
+<% if @bookings.any? %>
+	<% @bookings.each do |booking| %>
+		<%= link_to booking_path(booking) do %>
+			<%= booking.listing.title %>
+		<% end %>
+		<p><%= booking.check_in %> to <%= booking.check_out %></p>
+	<% end %>
+<% else %>
+	<p>No bookings yet </p>
+<% end %>
+

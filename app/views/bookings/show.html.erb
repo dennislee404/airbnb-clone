@@ -1,0 +1,9 @@
+<h1>Booking for <%= @booking.listing.title %></h1>
+<h4>Hosted by <%= @booking.listing.user.email %></h4>
+
+<br>
+
+<p>Check in date: <%= @booking.check_in %></p>
+<p>Check out date: <%= @booking.check_out %></p>
+<p>Number of days: <%= @booking.duration %></p>
+<p>Total Price: <%= @booking.total_price %></p>
