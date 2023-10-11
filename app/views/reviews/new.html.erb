@@ -1,0 +1,8 @@
+<h1>New Review</h1>
+<h3>for <%= @listing.title %></h3>
+<%= form_with model: @review do |f| %>
+	<%= f.text_area :comment, placeholder: "Write your review here" %><br>
+	<p>Ratings: <%= f.number_field :rating, min: 0, max: 5%></p>
+	<%= f.hidden_field :listing_id, value: @listing.id%>
+	<%= f.submit 'Review' %>
+<% end %>

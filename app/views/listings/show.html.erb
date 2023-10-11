@@ -14,3 +14,19 @@
 <% else %>
 	<%= link_to 'Make Booking', new_booking_path(listing_id: @listing.id) %>
 <% end %>
+
+<div>
+	<h3>Reviews</h3>
+	<% if @listing.reviews.any?%>
+		<% @listing.reviews.each do |review| %>
+			<li>
+				<%= review.comment %> 
+				(<%= review.rating %>/5)
+				by <%= review.user.email %>
+			</li>
+		<% end %>
+	<% else %>
+		<p>No reviews yet </p>
+	<% end %>
+	<%= link_to 'Leave a review', new_review_path(listing_id: @listing.id) %>
+</div>

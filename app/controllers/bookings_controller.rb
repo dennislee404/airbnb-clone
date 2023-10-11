@@ -14,10 +14,9 @@ class BookingsController < ApplicationController
 		@booking = current_user.bookings.create(booking_params.merge(listing_id: @listing.id))
 
 		if @booking.save
-			redirect_to booking_path(@booking), #notice: "Booking Successful" 
+			redirect_to booking_path(@booking)
 		else
 			render :new
-			# redirect_to listing_path(@listing), notice: "Booking Failed" 
 		end
 	end
 
