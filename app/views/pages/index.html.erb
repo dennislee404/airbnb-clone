@@ -1,5 +1,16 @@
 <h1>All Listings</h1>
 
+<%= form_tag(root_path, method: :get) do %>
+	<%= text_field_tag :location, params[:location] %>
+	<%= submit_tag 'Search' %>
+<% end %>
+
+<%= form_tag(root_path, method: :get) do %>
+	<%= date_field_tag :check_in, params[:check_in] %>
+	<%= date_field_tag :check_out, params[:check_out] %>
+	<%= submit_tag 'Search' %>
+<% end %>
+
 <% if @listings.any? %>
 	<% @listings.each do |listing| %>
 		<%= link_to listing_path(listing) do %>
@@ -8,5 +19,5 @@
 		<p>Hosted by: <%= listing.user.email %></p>
 	<% end %>
 <% else %>
-	<p>No listings yet </p>
+	<p>No listings found </p>
 <% end %>

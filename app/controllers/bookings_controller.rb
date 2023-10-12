@@ -11,12 +11,16 @@ class BookingsController < ApplicationController
 
 	def create
 		@listing = Listing.find_by(id: params[:booking][:listing_id])
-		@booking = current_user.bookings.create(booking_params.merge(listing_id: @listing.id))
-
-		if @booking.save
-			redirect_to booking_path(@booking)
+		if available_dates?(params[:check_in],params[:check_out],@listing)
+			@booking = current_user.bookings.create(booking_params)
+			@booking.listing_id = @listing.id
+			if @booking.save
+				redirect_to booking_path(@booking)
+			else
+				render :new
+			end
 		else
-			render :new
+			redirect_to listing_path(@listing) 
 		end
 	end
 
@@ -34,4 +38,13 @@ class BookingsController < ApplicationController
 		def booking_params
 			params.require(:booking).permit(:check_in, :check_out)
 		end
+
+		def available_dates?(ci_date,co_date,listing)
+			overlap_bookings = 
+			listing.bookings.where(check_in: ci_date..co_date)
+			.or(listing.bookings.where(check_out: ci_date..co_date))
+
+			overlap_bookings.empty?
+		end
+
 end
