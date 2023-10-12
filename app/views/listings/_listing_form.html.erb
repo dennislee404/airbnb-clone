@@ -15,7 +15,7 @@
 	<%= f.check_box :availability %>
 	<br><br>
 	<%= f.label :property_type %>
-	<%= f.text_field :property_type %>
+	<%= f.select(:property_type, Listing::PROPERTY_TYPES, include_blank: true) %>
 	<br><br>
 	<%= f.label :price %>
 	<%= f.number_field :price %>
