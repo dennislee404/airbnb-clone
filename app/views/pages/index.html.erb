@@ -1,19 +1,44 @@
-<h1>All Listings</h1>
+<h1 class="text-center">All Listings</h1>
 
-<%= form_tag(root_path, method: :get) do %>
-	<%= text_field_tag :location, params[:location], placeholder: 'Enter location' %>
-	<%= date_field_tag :check_in, params[:check_in] %>
-	<%= date_field_tag :check_out, params[:check_out] %>
-	<%= submit_tag 'Search' %>
-<% end %>
-
-<% if @listings.any? %>
-	<% @listings.each do |listing| %>
-		<%= link_to listing_path(listing) do %>
-			<%= listing.title %>
-		<% end %>
-		<p>Hosted by: <%= listing.user.email %></p>
+<div class="text-center">
+	<%= form_tag(root_path, method: :get) do %>
+		<%= text_field_tag :location, params[:location], placeholder: 'Enter location' %>
+		<%= date_field_tag :check_in, params[:check_in] %>
+		<%= date_field_tag :check_out, params[:check_out] %>
+		<%= submit_tag 'Search' %>
 	<% end %>
-<% else %>
-	<p>No listings found </p>
-<% end %>
+</div>
+
+<div class="container">
+	<div class="row">		
+		<% if @listings.any? %>
+			<% @listings.each do |listing| %>
+				<div class="col-4 p-0">
+					<div class="card m-2">
+					  	<%= link_to listing_path(listing) do %>
+						  <div class="card-img-top text-center">
+								<% if listing.photos.attached? %>		
+									<%= image_tag listing.photos.first, height:200 %>						
+								<% else %>					
+									<p>No photos found</p>
+								<% end%>
+							</div>
+						  <div class="card-body">
+						  	<h6 class="card-title"><%= listing.title %></h6>
+						    <p class="card-text m-0">Hosted by: <%= listing.user.email %></p>
+							<p class="card-text">RM<%= listing.price.to_i %> per night</p>
+						  </div>
+					  	<% end %>
+					</div>
+				</div>						
+			<% end %>
+		<% else %>
+			<p>No listings found </p>
+		<% end %>	
+	</div>
+</div>
+
+
+
+		
+	
