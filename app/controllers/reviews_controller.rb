@@ -1,9 +1,4 @@
 class ReviewsController < ApplicationController
-	def new
-		@listing = Listing.find_by(id: params[:listing_id])
-		@review = Review.new
-	end
-
 	def create
 		@listing = Listing.find_by(id: params[:review][:listing_id])
 		@review = current_user.reviews.create(
@@ -13,9 +8,11 @@ class ReviewsController < ApplicationController
 			reviewable_id: @listing.id)
 
 		if @review.save
-			redirect_to listing_path(@listing)
+			render turbo_stream: turbo_stream.append('review_form', partial:'review_details', locals:{review: @review})
+			# redirect_to listing_path(@listing)
 		else
-			render :new 
+			redirect_to listing_path(@listing)
+			# render :new 
 		end
 	end
 

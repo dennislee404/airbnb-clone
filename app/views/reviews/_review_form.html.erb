@@ -1,0 +1,10 @@
+<%= form_with model: @review do |f| %>
+	<%= f.text_area :comment, placeholder: "Write your review here", class: "form-control" %>
+	<%= f.hidden_field :listing_id, value: @listing.id%>
+	<%= f.submit 'Review' %>
+<% end %>
+
+<!-- <div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div> -->

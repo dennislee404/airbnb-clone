@@ -1,4 +1,11 @@
-<h1>Title: <%= @listing.title %></h1>
+	<h1>Title: <%= @listing.title %></h1>
+<div class="text-center">
+	<% if @listing.photos.attached? %>
+		<% @listing.photos.each do |photo| %>
+			<%= image_tag photo, height: 200 %>
+		<% end %>
+	<% end %>
+</div>
 <p>Description: <%= @listing.description %></p>
 <p>Number of Rooms: <%= @listing.rooms %></p>
 <p>Capacity: <%= @listing.capacity %></p>
@@ -9,24 +16,26 @@
 <p>Availabilty: <%= @listing.availability %></p>
 
 <% if current_user.id == @listing.user.id %>
-	<%= link_to 'Edit Listing', edit_listing_path(@listing) %>
-	<%= link_to 'Delete Listing', listing_path(@listing), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+	<%= link_to 'Edit Listing', edit_listing_path(@listing)%>
+	<%= link_to 'Delete Listing', listing_path(@listing), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 <% else %>
-	<%= link_to 'Make Booking', new_booking_path(listing_id: @listing.id) %>
+	<%= button_to 'Make Booking', new_booking_path(listing_id: @listing.id), method: :get %>
 <% end %>
 
-<div>
-	<h3>Reviews</h3>
-	<% if @listing.reviews.any?%>
-		<% @listing.reviews.each do |review| %>
-			<li>
-				<%= review.comment %> 
-				(<%= review.rating %>/5)
-				by <%= review.user.email %>
-			</li>
+<div class = "row m-3">
+	<div class="container">
+		<h3>Reviews</h3>
+		<%= turbo_frame_tag "review_form" do %>
+			<%= render 'reviews/review_form'%><br>
+			<% if @listing.reviews.any?%>
+				<% @listing.reviews.each do |review| %>
+					<section id="review_details">
+						<%= render "reviews/review_details", review: review %>
+					</section>
+				<% end %>
+			<% else %>
+				<p>No reviews yet</p>
+			<% end %>
 		<% end %>
-	<% else %>
-		<p>No reviews yet </p>
-	<% end %>
-	<%= link_to 'Leave a review', new_review_path(listing_id: @listing.id) %>
+	</div>
 </div>

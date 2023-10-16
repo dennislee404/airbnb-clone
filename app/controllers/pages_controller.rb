@@ -2,14 +2,15 @@ class PagesController < ApplicationController
 	def index
 		@check_in = params[:check_in]
 		@check_out = params[:check_out]
+		@listings = Listing.where(availability: true) 
 
 		if @check_in.blank? and @check_out.blank? and params[:location].blank?
-			@listings = Listing.all 
+			@listings = @listings
 		else
 			if params[:location].present?
-				@listings = Listing.where(location: params[:location])
+				@listings = @listings.where(location: params[:location])
 			else
-				@listings = Listing.all
+				@listings = @listings
 			end
 
 			if params[:check_in].present? and params[:check_out].present?
