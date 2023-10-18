@@ -12,6 +12,4 @@ default: &default
 development:
   <<: *default
   database: airbnb_clone
-  host: localhost
-  user: postgres
-  password: Jul231960?
+
