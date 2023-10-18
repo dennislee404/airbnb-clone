@@ -32,7 +32,7 @@ group :development do
   gem "web-console"
 
   # Deployment
-  gem 'capistrano', '~> 3.17.0'
+  gem 'capistrano', '< 5'
   gem 'capistrano-rvm'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
