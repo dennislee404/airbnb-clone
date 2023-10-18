@@ -3,11 +3,11 @@ lock '~> 3.17.0'
 
 # Change these
 set :repo_url,        'git@github.com:dennislee404/airbnb-clone.git'
-set :user,            'dennislee404'
+set :user,            'deploy'
 
 # Don't change these unless you know what you're doing
 set :pty,             false
-set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/den-airbnb.pem) }
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa) }
 set :nginx_use_ssl,   true
 
 ## Defaults:
