@@ -7,7 +7,7 @@ set :user,            'deploy'
 
 # Don't change these unless you know what you're doing
 set :pty,             false
-set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa) }
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(C:\Users\denni\.ssh\id_rsa) }
 set :nginx_use_ssl,   true
 
 ## Defaults:
